@@ -50,13 +50,15 @@ public class ScSynthLibrary {
             final String baseTempPath = System.getProperty("java.io.tmpdir");
 
             Random rand = new Random();
-            int randomInt = 100000 + rand.nextInt(899999);
+	    //            int randomInt = 100000 + rand.nextInt(899999);
+	    int randomInt = 100000;
 
+	    System.out.println("gbj java3\n");
             File tempDir = new File(baseTempPath + File.separator + "scsynth_jna" + randomInt);
             if (tempDir.exists() == false) {
                 tempDir.mkdir();
             }
-            tempDir.deleteOnExit();
+	    //            tempDir.deleteOnExit();
 
             File tempUgensDir = new File(tempDir.getPath() + File.separator + "ugens");
             if (tempUgensDir.exists() == false) {
@@ -94,30 +96,11 @@ public class ScSynthLibrary {
             ugensDir = tempUgensDir.getPath();
 
             System.setProperty("jna.library.path", tempDir.getPath());
-            Native.register("scsynth_jna");
+            Native.register("scsynth");
         } catch (Throwable e) {
             e.printStackTrace();
         }
     }
-
-    public static native ScsynthJnaStartOptions.ByReference scsynth_jna_get_default_start_options();
-
-    public static native int scsynth_jna_get_device_count();
-
-    public static native String scsynth_jna_get_device_name(int i);
-
-    public static native int scsynth_jna_get_device_max_input_channels(int i);
-
-    public static native int scsynth_jna_get_device_max_output_channels(int i);
-    
-
-    public static native int scsynth_jna_init();
-
-    public static native void scsynth_jna_cleanup();
-
-    public static native Pointer scsynth_jna_start(ScsynthJnaStartOptions options);
-
-    public static native SndBuf scsynth_jna_copy_sndbuf(Pointer world, int index);
 
     public static native void World_Cleanup(Pointer world);
 

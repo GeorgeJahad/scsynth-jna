@@ -31,16 +31,16 @@ public class ScSynth implements Runnable {
     @Override
     public void run() {
         if (!running) {
-            ScSynthLibrary.scsynth_jna_init();
+            ScSynthHelperLibrary.scsynth_jna_init();
 
             options.UGensPluginPath = ScSynthLibrary.getUgensPath();
-            world = ScSynthLibrary.scsynth_jna_start(options);
+            world = ScSynthHelperLibrary.scsynth_jna_start(options);
             running = true;
             for (ScSynthStartedListener l : startedListeners) {
-                l.scSynthStarted();
+                l.started();
             }
             ScSynthLibrary.World_WaitForQuit(world);
-            ScSynthLibrary.scsynth_jna_cleanup();
+            ScSynthHelperLibrary.scsynth_jna_cleanup();
             running = false;
             for (ScSynthStoppedListener l : stoppedListeners) {
                 l.scSynthStopped();
@@ -112,20 +112,20 @@ public class ScSynth implements Runnable {
     public SndBuf getSndBuf(int index) {
         SndBuf retval = null;
         if (running) {
-            retval = ScSynthLibrary.scsynth_jna_copy_sndbuf(world, index);
+            retval = ScSynthHelperLibrary.scsynth_jna_copy_sndbuf(world, index);
         }
         return retval;
     }
 
     public static void main(String[] args) {
-        ScsynthJnaStartOptions.ByReference retval = ScSynthLibrary.scsynth_jna_get_default_start_options();
-        int count = ScSynthLibrary.scsynth_jna_get_device_count();
-//        //int nrc = ScSynthLibrary.scsynth_jna_get_device_max_input_channels(0);
-        System.out.println("Nr devices: " + count);
-	for(int i = 0 ; i < count; i++ )
- 	{
-		System.out.println("Device: #" + i + " - " + ScSynthLibrary.scsynth_jna_get_device_name(i));
-	}
+//         ScsynthJnaStartOptions.ByReference retval = ScSynthLibrary.scsynth_jna_get_default_start_options();
+//         int count = ScSynthLibrary.scsynth_jna_get_device_count();
+// //        //int nrc = ScSynthLibrary.scsynth_jna_get_device_max_input_channels(0);
+//         System.out.println("Nr devices: " + count);
+// 	for(int i = 0 ; i < count; i++ )
+//  	{
+// 		System.out.println("Device: #" + i + " - " + ScSynthLibrary.scsynth_jna_get_device_name(i));
+// 	}
 //        ScSynth sc = new ScSynth();
 //        (new Thread(sc)).start();
 //        ScSynthSetup s = new ScSynthSetup();

@@ -8,6 +8,7 @@
 #include <math.h>
 #include "clz.h"
 #include <stdexcept>
+#include <string.h>
 #ifdef SC_WIN32
 #include <pthread.h>
 #include <winsock2.h>
@@ -153,13 +154,14 @@ struct SndBuf * scsynth_jna_copy_sndbuf(World *world, uint32 index)
 	bool didChange;
 	struct SndBuf* buf = (struct SndBuf*) malloc(sizeof(struct SndBuf));
         memset(buf, 0, sizeof(struct SndBuf));
-	int serverErr = World_CopySndBuf(world, index, buf, false, didChange);
+	int serverErr = World_CopySndBuf(world, index, buf, false, &didChange);
 	return buf;
 }
 
 
 int scsynth_jna_init()
 {
+  printf("Entering scsynth_jna_init\n");
 #ifdef SC_WIN32
 #ifdef SC_WIN32_STATIC_PTHREADS
     // initialize statically linked pthreads library
