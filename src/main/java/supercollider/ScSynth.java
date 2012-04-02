@@ -115,6 +115,24 @@ public class ScSynth implements Runnable {
         }
         return retval;
     }
+    private float[] internalBufToFloatArray(SndBuf buf) {
+        float[] retval = new float[0];
+        int nFrames = buf.frames;
+        Pointer data = buf.data;
+        if (data != Pointer.NULL) {
+            retval = data.getFloatArray(0, nFrames);
+        }
+        return retval;
+    }
+
+    public float[] getSndBufAsFloatArray(int index) {
+        float[] retval = new float[0];
+        if (running) {
+            SndBuf buf = ScSynthHelperLibrary.scsynth_jna_copy_sndbuf(world, index);
+            retval = internalBufToFloatArray(buf);
+        }
+        return retval;
+    }
 
     public static void main(String[] args) {
 //         ScsynthJnaStartOptions.ByReference retval = ScSynthLibrary.scsynth_jna_get_default_start_options();
