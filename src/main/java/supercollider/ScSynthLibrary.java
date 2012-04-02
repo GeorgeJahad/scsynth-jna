@@ -50,15 +50,13 @@ public class ScSynthLibrary {
             final String baseTempPath = System.getProperty("java.io.tmpdir");
 
             Random rand = new Random();
-	    //            int randomInt = 100000 + rand.nextInt(899999);
-	    int randomInt = 100000;
+            int randomInt = 100000 + rand.nextInt(899999);
 
-	    System.out.println("gbj java3\n");
             File tempDir = new File(baseTempPath + File.separator + "scsynth_jna" + randomInt);
             if (tempDir.exists() == false) {
                 tempDir.mkdir();
             }
-	    //            tempDir.deleteOnExit();
+            tempDir.deleteOnExit();
 
             File tempUgensDir = new File(tempDir.getPath() + File.separator + "ugens");
             if (tempUgensDir.exists() == false) {
