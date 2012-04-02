@@ -122,6 +122,9 @@ public class ScSynthLibrary {
         if (Util.getOsName().equals("windows")) {
             return new String[]{"libsndfile-1.dll"};
         }
+        else if (Util.getOsName().equals("linux")) {
+            return new String[]{"libscsynth.so"};
+        }
         return new String[]{};
     }
 
