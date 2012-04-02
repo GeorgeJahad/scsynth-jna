@@ -31,9 +31,8 @@ public class ScSynth implements Runnable {
     @Override
     public void run() {
         if (!running) {
-            ScSynthHelperLibrary.scsynth_jna_init();
-
             options.UGensPluginPath = ScSynthLibrary.getUgensPath();
+            ScSynthHelperLibrary.scsynth_jna_init();
             world = ScSynthHelperLibrary.scsynth_jna_start(options);
             running = true;
             for (ScSynthStartedListener l : startedListeners) {
