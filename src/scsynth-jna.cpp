@@ -161,7 +161,7 @@ struct SndBuf * scsynth_jna_copy_sndbuf(World *world, uint32 index)
 
 int scsynth_jna_init()
 {
-  printf("Entering scsynth_jna_init\n");
+  printf( "scsynth_jna: " __DATE__ " " __TIME__ );
 #ifdef SC_WIN32
 #ifdef SC_WIN32_STATIC_PTHREADS
     // initialize statically linked pthreads library
