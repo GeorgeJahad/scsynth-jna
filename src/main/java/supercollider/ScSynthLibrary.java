@@ -4,6 +4,7 @@ import com.sun.jna.Native;
 import com.sun.jna.Pointer;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -43,7 +44,33 @@ public class ScSynthLibrary {
 
         return file;
     }
+  
+  private static String readFileAsString(String filePath)
+  {
+    try
+      {
+        FileInputStream input = new FileInputStream(filePath);
 
+        byte[] fileData = new byte[input.available()];
+    
+        input.read(fileData);
+        input.close();
+    
+        return new String(fileData, "UTF-8");
+
+      } catch (Throwable e) 
+      {
+      e.printStackTrace();
+      }
+    return "";
+  }
+
+  private static void printScsynthVersion()
+  {
+    String version_file = scsynthDir + File.separator + "sc-version.txt";
+    System.out.println(readFileAsString(version_file));
+  }
+    
     static {
         try {
 
@@ -95,6 +122,8 @@ public class ScSynthLibrary {
 
             System.setProperty("jna.library.path", tempDir.getPath());
             Native.register("scsynth");
+            printScsynthVersion();
+
         } catch (Throwable e) {
             e.printStackTrace();
         }
@@ -121,7 +150,7 @@ public class ScSynthLibrary {
             return new String[]{"libsndfile-1.dll"};
         }
         else if (Util.getOsName().equals("linux")) {
-            return new String[]{"libscsynth.so"};
+          return new String[]{"libscsynth.so","sc-version.txt"};
         }
         return new String[]{};
     }
