@@ -152,6 +152,9 @@ public class ScSynthLibrary {
         else if (Util.getOsName().equals("linux")) {
           return new String[]{"libscsynth.so","sc-version.txt"};
         }
+        else if (Util.getOsName().equals("macosx")) {
+          return new String[]{"libscsynth.dylib","sc-version.txt"};
+        }
         return new String[]{};
     }
 
