@@ -27,7 +27,7 @@ endif
 
 all: clean supercollider cpp jar
 
-clean: clean-supercollider clean-cpp
+clean: clean-supercollider clean-cpp clean-jar
 
 supercollider:
 	./check-supercollider-version.sh ../supercollider $(BUILD_TYPE)
@@ -50,3 +50,5 @@ jar:
 	mvn compile
 	mvn package
 
+clean-jar:
+	rm -fr target/*
