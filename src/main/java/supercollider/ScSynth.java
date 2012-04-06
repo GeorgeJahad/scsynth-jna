@@ -135,14 +135,17 @@ public class ScSynth implements Runnable {
     }
 
     public static void main(String[] args) {
-//         ScsynthJnaStartOptions.ByReference retval = ScSynthLibrary.scsynth_jna_get_default_start_options();
-//         int count = ScSynthLibrary.scsynth_jna_get_device_count();
-// //        //int nrc = ScSynthLibrary.scsynth_jna_get_device_max_input_channels(0);
-//         System.out.println("Nr devices: " + count);
-// 	for(int i = 0 ; i < count; i++ )
-//  	{
-// 		System.out.println("Device: #" + i + " - " + ScSynthLibrary.scsynth_jna_get_device_name(i));
-// 	}
+        ScSynthLibrary.getUgensPath();
+        ScSynthHelperLibrary.scsynth_jna_init();
+
+        ScsynthJnaStartOptions.ByReference retval = ScSynthHelperLibrary.scsynth_jna_get_default_start_options();
+        int count = ScSynthHelperLibrary.scsynth_jna_get_device_count();
+//        //int nrc = ScSynthHelperLibrary.scsynth_jna_get_device_max_input_channels(0);
+        System.out.println("Nr devices: " + count);
+	for(int i = 0 ; i < count; i++ )
+ 	{
+		System.out.println("Device: #" + i + " - " + ScSynthHelperLibrary.scsynth_jna_get_device_name(i));
+	}
 //        ScSynth sc = new ScSynth();
 //        (new Thread(sc)).start();
 //        ScSynthSetup s = new ScSynthSetup();
