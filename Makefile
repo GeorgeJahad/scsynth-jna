@@ -31,9 +31,9 @@ clean: clean-supercollider clean-cpp
 
 supercollider:
 	./check-supercollider-version.sh ../supercollider $(BUILD_TYPE)
-	cp sc-version.txt src/main/resources/supercollider/scsynth/$(DIR_NAME)/
+	cp sc-version.txt src/main/resources/supercollider/scsynth/$(DIR_NAME)
 	cd ../supercollider/build; cmake  -DSC_QT=OFF -DLIBSCSYNTH=ON -DSC_WII=OFF -DSUPERNOVA=OFF ..; make
-	cp ../supercollider/build/server/scsynth/libscsynth.$(LIB_SUFFIX) src/main/resources/supercollider/scsynth/$(DIR_NAME)/
+	cp ../supercollider/build/server/scsynth/libscsynth.$(LIB_SUFFIX) src/main/resources/supercollider/scsynth/$(DIR_NAME)
 	cp ../supercollider/build/server/plugins/*.$(PLUGIN_SUFFIX) src/main/resources/supercollider/scsynth/$(DIR_NAME)/ugens
 
 clean-supercollider:
