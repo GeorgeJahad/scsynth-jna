@@ -1,19 +1,19 @@
 ifeq ($(BUILD_TYPE),linux_32)
-SCONS_COMMAND="scons"
+SCONS_FILE="SConstruct"
 LIB_SUFFIX=so
 PLUGIN_SUFFIX=so
 DIR_NAME=linux/x86
 else
 
   ifeq ($(BUILD_TYPE),linux_64)
-  SCONS_COMMAND="scons"
+  SCONS_FILE="SConstruct"
   LIB_SUFFIX=so
   PLUGIN_SUFFIX=so
   DIR_NAME=linux/x86_64
   else
 
     ifeq ($(BUILD_TYPE),macosx)
-    SCONS_COMMAND="scons -f SConstruct.macosx"
+    SCONS_FILE="SConstruct.macosx"
     LIB_SUFFIX=dylib
     PLUGIN_SUFFIX=scx
     DIR_NAME=macosx/x86_64
@@ -40,11 +40,11 @@ clean-supercollider:
 	cd ../supercollider;rm -fr build; mkdir build; 
 
 cpp:
-	$(SCONS_COMMAND)
+	scons -f $(SCONS_FILE)
 	cp libscsynth_jna.$(LIB_SUFFIX) src/main/resources/supercollider/scsynth/$(DIR_NAME)/
 
 clean-cpp:
-	scons -c
+	scons -c -f $(SCONS_FILE)
 
 jar:
 	mvn compile
