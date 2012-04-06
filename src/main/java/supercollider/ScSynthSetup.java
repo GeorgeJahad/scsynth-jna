@@ -27,7 +27,7 @@ public class ScSynthSetup extends JFrame {
 
         setLayout(new MigLayout());
 
-        ScsynthJnaStartOptions.ByReference options = ScSynthLibrary.scsynth_jna_get_default_start_options();
+        ScsynthJnaStartOptions.ByReference options = ScSynthHelperLibrary.scsynth_jna_get_default_start_options();
 
         add(new JLabel("Information"), "split, span, gaptop 10");
         add(new JSeparator(), "growx, wrap, gaptop 10");
